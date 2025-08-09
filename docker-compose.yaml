@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: fastapi_mongo_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  web:
+    build: ./app
+    container_name: fastapi_mongo_app
+    depends_on:
+      - mongodb
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_USER=root
+      - MONGO_PASS=root
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB=msm_db
+    restart: on-failure
