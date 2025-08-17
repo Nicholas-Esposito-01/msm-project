@@ -23,7 +23,8 @@ monsters = [
     "Mammott",
     "Toe Jammer",
     "Potbelly",
-    "Tweedle"
+    "Tweedle",
+    "Kayna"
 ]
 
 # Dictionary to store results
