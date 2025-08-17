@@ -1,0 +1,52 @@
+{
+    "Natural": {
+        "Common": [
+            {
+                "Name": "Noggin",
+                "Breeding_1": null,
+                "Breeding_2": null,
+                "Breeding_time": 0,
+                "Extra": "Buy from shop"
+            },
+            {
+                "Name": "Mammott",
+                "Breeding_1": null,
+                "Breeding_2": null,
+                "Breeding_time": 0,
+                "Extra":"Buy from shop"
+            },
+            {
+                "Name": "Toe Jammer",
+                "Breeding_1": null,
+                "Breeding_2": null,
+                "Breeding_time": 0,
+                "Extra": "Buy from shop"
+            },
+            {
+                "Name": "Potbelly"
+            },
+            {
+                "Name": "Tweedle"
+            }
+        ],
+        "Rare": [
+
+        ],
+        "Epic": [
+
+        ]
+    },
+    "Fire": {
+        "Common": [
+            {
+                "Name": "Kayna"
+            }
+        ],
+        "Rare": [
+
+        ],
+        "Epic": [
+
+        ]
+    }
+}
