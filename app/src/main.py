@@ -40,7 +40,11 @@ for monster in monsters:
         name_elem = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, f"//span[text()='{monster}']"))
         )
-        monster_data[monster] = {"name": name_elem.text, "url": monster_url}
+        monster_img = driver.find_element(By.XPATH, "//img[@alt='Monster Image']")
+        egg_img = driver.find_element(By.XPATH, "//img[contains(@alt, 'Flex')]")
+        monster_data[monster] = {"name": name_elem.text, 
+                                 "monster_img": monster_img.get_attribute("src"),
+                                 "egg_img": egg_img.get_attribute("srcset")}
         print(f"Found: {monster}")
         
     except Exception as e:
@@ -50,4 +54,4 @@ for monster in monsters:
 # --- Close the browser ---
 driver.quit()
 
-
+print(monster_data)
