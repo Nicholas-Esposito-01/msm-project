@@ -1,57 +1,28 @@
-import json
+import requests
+from bs4 import BeautifulSoup
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
+from data_structures import categories, natural_monsters, natural_rare_monsters, natural_epic_monsters
 
-# --- Setup Selenium in headless mode ---
-options = Options()
-options.add_argument("--headless")            # run in background
-options.add_argument("--no-sandbox")          # required for some Linux/WSL setups
-options.add_argument("--disable-dev-shm-usage") # prevent resource issues
-options.add_argument("--disable-gpu")         # optional, good for headless
-options.add_argument("--window-size=1920,1080") # optional, ensures full page render
-driver = webdriver.Chrome(options=options)
+base_url = 'https://mysingingmonsters.fandom.com/wiki/'
 
-# --- Base URL and monster list ---
-base_url = "https://www.msmpokegamer.com/monsters/"
-monsters = [
-    "Noggin",
-    "Mammott",
-    "Toe Jammer",
-    "Potbelly",
-    "Tweedle",
-    "Kayna"
-]
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/113.0.0.0 Safari/537.36"
+}
 
-# Dictionary to store results
-monster_data = {}
+for monster in natural_monsters:
 
-# --- Loop through monsters ---
-for monster in monsters:
-    monster_url = base_url + monster.lower().replace(" ", "-")
-    driver.get(monster_url)
-    
-    try:
-        # Wait up to 10 seconds for the span with monster name
-        name_elem = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, f"//span[text()='{monster}']"))
-        )
-        monster_img = driver.find_element(By.XPATH, "//img[@alt='Monster Image']")
-        egg_img = driver.find_element(By.XPATH, "//img[contains(@alt, 'Flex')]")
-        monster_data[monster] = {"name": name_elem.text, 
-                                 "monster_img": monster_img.get_attribute("src"),
-                                 "egg_img": egg_img.get_attribute("srcset")}
-        print(f"Found: {monster}")
-        
-    except Exception as e:
-        print(f"{monster}: Not found ({e})")
-        monster_data[monster] = {"name": None, "url": monster_url}
+    monster_url = base_url + monster
+    response = requests.get(monster_url, headers=headers)
 
-# --- Close the browser ---
-driver.quit()
+    html = response.text
 
-print(monster_data)
+    soup = BeautifulSoup(html, 'html.parser')
+
+    monster_name = soup.find("h2", {"data-source": "title"})
+    monster_img = soup.find("img", {"alt": "Current Design"})
+
+    print("Found Monster: ", monster_name.text)
+    print(monster_img)
+    time.sleep(1)

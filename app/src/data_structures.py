@@ -1,0 +1,50 @@
+categories = ['Natural', 
+              'Fire', 
+              'Magical', 
+              'Ethereal', 
+              'Paironormals', 
+              'Primordial', 
+              'Wubbox', 
+              'Wublin', 
+              'Werdos', 
+              'Seasonals', 
+              'Mythical', 
+              'Celestials', 
+              'Dipsters', 
+              'Titansoul'
+]
+
+natural_monsters = [
+    'Noggin',
+    'Mammott',
+    'Toe_Jammer',
+    'Potbelly',
+    'Tweedle',
+    'Drumpler',
+    'Fwog',
+    'Maw',
+    'Shrubb',
+    'Furcorn',
+    'Oaktopus',
+    'Dandidoo',
+    'Quibble',
+    'Pango',
+    'Cybop',
+    'T-Rox',
+    'Bowgart',
+    'clamble',
+    'Pummel',
+    'Congle',
+    'Thumpies',
+    'Sponge',
+    'PomPom',
+    'Reedling',
+    'Entbrat',
+    'Deedge',
+    'Riff',
+    'Shellbeat',
+    'Quarrister'
+]
+
+natural_rare_monsters = [f'Rare_{monster}' for monster in natural_monsters]
+natural_epic_monsters = [f'Epic_{monster}' for monster in natural_monsters]
