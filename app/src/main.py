@@ -29,9 +29,23 @@ for monster in natural_monsters:
                     for a in islands_div.find_all('a')
                     if a.text.strip() and a.text.strip() not in excluded_islands
     ]
-        
     
+    breeding_time = soup.find("div", {"data-source": "breeding time"})
+    enhanced_time = soup.find("div", {"data-source": "enhanced time"})
+
+    breeding_h2 = soup.find("span", {"id": "Breeding"})
+
+    breeding_ul = breeding_h2.find_next('ul')
+
+    breeding_combinations = [
+        (li.find_all('a')[2].text.strip(), li.find('strong').text.strip())
+        for li in breeding_ul.find_all('li')
+        if len((links := li.find_all('a'))) > 2
+    ]
+    
+    for combination in breeding_combinations:
+        print(f"Combination: {combination[0]} + {combination[1]}")
 
     print("Found Monster: ", monster_name.text)
     #print(monster_img)
-    time.sleep(1)
+    time.sleep(2)
