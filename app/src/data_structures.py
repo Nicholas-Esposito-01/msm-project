@@ -14,7 +14,11 @@ categories = ['Natural',
               'Titansoul'
 ]
 
-natural_monsters = [
+natural_monsters = ['Noggin', 'Mammott']
+
+excluded_islands = ['Colossingum', 'Gold', 'Tribal', 'Composer', 'Shugabush']
+
+natural_monsters_2 = [
     'Noggin',
     'Mammott',
     'Toe_Jammer',

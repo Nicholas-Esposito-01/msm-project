@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
-from data_structures import categories, natural_monsters, natural_rare_monsters, natural_epic_monsters
+from data_structures import categories, natural_monsters, natural_rare_monsters, natural_epic_monsters, excluded_islands
 
 base_url = 'https://mysingingmonsters.fandom.com/wiki/'
 
@@ -23,6 +23,15 @@ for monster in natural_monsters:
     monster_name = soup.find("h2", {"data-source": "title"})
     monster_img = soup.find("img", {"alt": "Current Design"})
 
+    islands_div = soup.find("div", {"data-source": "island(s)"})
+
+    island_names = [a.text.strip() 
+                    for a in islands_div.find_all('a')
+                    if a.text.strip() and a.text.strip() not in excluded_islands
+    ]
+        
+    
+
     print("Found Monster: ", monster_name.text)
-    print(monster_img)
+    #print(monster_img)
     time.sleep(1)
